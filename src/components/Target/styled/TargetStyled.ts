@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { TargetProps } from '../../../types/types';
 
 interface TargetButton {
-  styledBackgroundColour?: string;
+  styledBackgroundColour: string;
   styledHeight: string;
   styledWidth: string;
   styledTranslate: string;
@@ -29,7 +29,7 @@ export const TargetStyled = styled.button<TargetButton>`
     css`
       height: ${styledHeight || '30px'};
       width: ${styledWidth || '30px'};
-      background: ${styledBackgroundColour || 'lightgrey'};
+      background: ${styledBackgroundColour || 'black'};
       transform: ${styledTranslate || 'none'}
     `
   )}
