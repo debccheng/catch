@@ -29,8 +29,16 @@ export const TargetStyled = styled.button<TargetButton>`
     css`
       height: ${styledHeight || '30px'};
       width: ${styledWidth || '30px'};
-      background: ${styledBackgroundColour || 'black'};
+      background: ${styledBackgroundColour || 'coral'};
       transform: ${styledTranslate || 'none'}
     `
   )}
+`;
+
+export const WrapperStyled = styled.section`
+  margin: 48px auto;
+  position: relative;
+  border: 4px solid #fff1ef;
+  width: 480px;
+  height: 480px;
 `;

@@ -6,16 +6,18 @@ import {
   initialGameState, isGameContinue, StateModel, updateGameState,
 } from '../../state/state';
 import { getRandomColour, getRandomNumber } from '../../util/helpers';
-import { TargetStyled } from './styled/TargetStyled';
+import { TargetStyled, WrapperStyled } from './styled/TargetStyled';
+import Timer from './components/Timer';
 
 const Target: FC = () => {
   const [targetProps, setTargetProps] = useState({
     styledHeight: '36px',
     styledWidth: '36px',
     styledTranslate: 'none',
-    styledBackgroundColour: 'black',
+    styledBackgroundColour: 'coral',
     score: 0,
   });
+  const [countdown, setCountdown] = useState<string | number>(10);
 
   const updateTarget = () => {
     setTargetProps({
@@ -44,7 +46,10 @@ const Target: FC = () => {
   };
 
   const makeInterval = (gameState: StateModel) => interval(gameState.time)
-    .pipe(map((v) => 5 - v));
+    .pipe(
+      map((time) => +countdown - time),
+      tap((timeRemaining) => setCountdown(timeRemaining)),
+    );
 
   useEffect(() => {
     const myObservable = fromEvent(
@@ -58,7 +63,9 @@ const Target: FC = () => {
       tap(resetTargetSize),
       takeWhile(isGameContinue),
     );
-    const subscription = myObservable.subscribe();
+    const subscription = myObservable.subscribe({
+      complete: () => setCountdown('GAME OVER'),
+    });
     return () => { if (subscription) subscription.unsubscribe(); };
   }, []);
 
@@ -70,15 +77,18 @@ const Target: FC = () => {
     score,
   } = targetProps;
   return (
-    <TargetStyled
-      id="target"
-      styledBackgroundColour={styledBackgroundColour}
-      styledHeight={styledHeight}
-      styledWidth={styledWidth}
-      styledTranslate={styledTranslate}
-    >
-      {score}
-    </TargetStyled>
+    <WrapperStyled>
+      <TargetStyled
+        id="target"
+        styledBackgroundColour={styledBackgroundColour}
+        styledHeight={styledHeight}
+        styledWidth={styledWidth}
+        styledTranslate={styledTranslate}
+      >
+        {score}
+      </TargetStyled>
+      <Timer countdown={countdown} />
+    </WrapperStyled>
   );
 };
 
