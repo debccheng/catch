@@ -39,6 +39,12 @@ export const WrapperStyled = styled.section`
   margin: 48px auto;
   position: relative;
   border: 4px solid #fff1ef;
-  width: 480px;
-  height: 480px;
+  width: 428px;
+  height: 428px;
+
+  @media (max-width: 448px) {
+    margin: 0;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+  }
 `;

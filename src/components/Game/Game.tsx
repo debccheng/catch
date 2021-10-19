@@ -6,10 +6,10 @@ import {
   initialGameState, isGameContinue, StateModel, updateGameState,
 } from '../../state/state';
 import { getRandomColour, getRandomNumber } from '../../util/helpers';
-import { TargetStyled, WrapperStyled } from './styled/TargetStyled';
+import { TargetStyled, WrapperStyled } from './styled/GameStyled';
 import Timer from './components/Timer';
 
-const Target: FC = () => {
+const Game: FC = () => {
   const [targetProps, setTargetProps] = useState({
     styledHeight: '36px',
     styledWidth: '36px',
@@ -92,4 +92,4 @@ const Target: FC = () => {
   );
 };
 
-export default Target;
+export default Game;

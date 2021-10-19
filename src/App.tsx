@@ -1,10 +1,10 @@
-import Target from './components/Target';
+import Game from './components/Game';
 
 const App = () => {
   return (
-    <div className="App">
-      <Target />
-    </div>
+    <main className="App">
+      <Game />
+    </main>
   );
 };
 
